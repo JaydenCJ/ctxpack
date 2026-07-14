@@ -1,0 +1,47 @@
+{
+  "budget": 150,
+  "reserve": 16,
+  "counter": "chars",
+  "separator": "\n\n",
+  "ellipsis": "…",
+  "groups": {
+    "history": { "maxFraction": 0.3 }
+  },
+  "sections": [
+    {
+      "id": "system",
+      "pinned": true,
+      "text": "You answer only from the provided context. Cite section ids. If the context does not contain the answer, say so plainly."
+    },
+    {
+      "id": "history-1",
+      "group": "history",
+      "priority": 1,
+      "text": "user: how do I rotate the API key for the staging project?\nassistant: Settings > API keys > Rotate. The old key stays valid for 24 hours."
+    },
+    {
+      "id": "history-2",
+      "group": "history",
+      "priority": 2,
+      "strategy": "truncate-tail",
+      "text": "user: and for production?\nassistant: Same flow, but rotation requires an owner role and takes effect immediately."
+    },
+    {
+      "id": "tool-logs",
+      "priority": 5,
+      "strategy": "truncate-head",
+      "minTokens": 20,
+      "text": "2026-07-13T09:14:02 GET /v1/keys 200 12ms\n2026-07-13T09:14:05 POST /v1/keys/rotate 403 8ms role=developer\n2026-07-13T09:14:11 POST /v1/keys/rotate 403 9ms role=developer\n2026-07-13T09:14:30 POST /v1/keys/rotate 200 41ms role=owner\n2026-07-13T09:14:31 GET /v1/keys 200 10ms"
+    },
+    {
+      "id": "scratch",
+      "priority": 0,
+      "text": "note to self: maybe the 403s are the role thing again, check the audit trail later"
+    },
+    {
+      "id": "question",
+      "pinned": true,
+      "text": "user: why did my first two rotation attempts fail?"
+    }
+  ]
+}

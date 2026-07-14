@@ -1,0 +1,38 @@
+{
+  "budget": 120,
+  "counter": "words",
+  "separator": "\n---\n",
+  "ellipsis": " […] ",
+  "order": "priority",
+  "sections": [
+    {
+      "id": "task",
+      "pinned": true,
+      "priority": 10,
+      "text": "Summarize the incident for the weekly report: what broke, customer impact, and the fix."
+    },
+    {
+      "id": "timeline",
+      "priority": 8,
+      "strategy": "truncate-middle",
+      "minTokens": 25,
+      "text": "09:02 deploy 2026-28 rolled out to the eu-west pool. 09:07 error rate on /v1/export rose from 0.2% to 14%. 09:11 pager fired for the export queue depth. 09:15 rollback initiated by the on-call. 09:19 error rate back to baseline. 09:40 root cause identified: the new serializer dropped the legacy date format still sent by v1 clients. 10:05 fix merged behind a compatibility flag. 10:30 canary redeploy clean. 11:00 flag enabled for all pools."
+    },
+    {
+      "id": "impact",
+      "priority": 9,
+      "text": "Roughly 4% of export jobs failed for 17 minutes; all failed jobs were retried automatically and completed by 09:26. No data loss."
+    },
+    {
+      "id": "customer-quotes",
+      "priority": 2,
+      "strategy": "truncate-tail",
+      "text": "Ticket 4812: exports stuck, unblocked after retry. Ticket 4815: dashboard showed stale numbers for ~20 minutes. Ticket 4816: asked whether scheduled exports were affected (they were not)."
+    },
+    {
+      "id": "postmortem-draft",
+      "priority": 1,
+      "text": "Draft notes: add a contract test for the legacy date format, alert on serializer error ratio per route, consider a slower rollout for the export service."
+    }
+  ]
+}
