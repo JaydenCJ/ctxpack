@@ -2,7 +2,7 @@
   "name": "ctxpack",
   "version": "0.1.0",
   "description": "Deterministic context-window packing: priority eviction, pinned sections, token budgets, reproducible layouts.",
-  "author": "JaydenCJ",
+  "author": "JaydenCJ <aisingioro.kiyon@gmail.com>",
   "license": "MIT",
   "type": "module",
   "bin": {
